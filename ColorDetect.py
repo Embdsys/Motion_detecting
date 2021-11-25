@@ -7,6 +7,11 @@ def DetectColors():
     # Capturing video through webcam
     webcam = cv2.VideoCapture(0)
 
+    # Initialize area counters
+    red_area = 0
+    green_area = 0
+    blue_area = 0
+
     # Check if camera is in use
     while not (webcam.isOpened()):
         #print('Camera in use by something else!!, cannot stream')
@@ -34,8 +39,7 @@ def DetectColors():
         # Set range for green color and
         # define mask
         green_lower = np.array([25, 52, 72], np.uint8)
-        #green_lower = np.array([95, 252, 254], np.uint8)
-        green_upper = np.array([102, 255, 255], np.uint8)
+        green_upper = np.array([120, 255, 255], np.uint8)
         green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
 
         # Set range for blue color and
@@ -74,6 +78,7 @@ def DetectColors():
         for pic, contour in enumerate(contours):
             area = cv2.contourArea(contour)
             if (area > 300):
+                red_area = area
                 print(f'Red:{area}')
                 x, y, w, h = cv2.boundingRect(contour)
                 imageFrame = cv2.rectangle(imageFrame, (x, y),
@@ -94,6 +99,7 @@ def DetectColors():
         for pic, contour in enumerate(contours):
             area = cv2.contourArea(contour)
             if (area > 300):
+                green_area=area
                 print(f'Green:{area}')
                 x, y, w, h = cv2.boundingRect(contour)
                 imageFrame = cv2.rectangle(imageFrame, (x, y),
@@ -113,6 +119,7 @@ def DetectColors():
         for pic, contour in enumerate(contours):
             area = cv2.contourArea(contour)
             if (area > 300):
+                blue_area = area
                 print(f'Blue:{area}')
                 x, y, w, h = cv2.boundingRect(contour)
                 imageFrame = cv2.rectangle(imageFrame, (x, y),
@@ -126,6 +133,16 @@ def DetectColors():
                             1.0, (255, 0, 0))
         # Program Termination
         cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
+
+        # Save colors detected
+        detected_colors = [red_area, green_area, blue_area]
+        #print(detected_colors)
+
+        # Evaluate colors
+        for i in detected_colors:
+            if i < 100:
+                print("missing a color")
+
         if cv2.waitKey(10) & 0xFF == ord('q'):
             webcam.release()
             cv2.destroyAllWindows()
