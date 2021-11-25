@@ -5,4 +5,4 @@ Use main to run the other 2 functions:
 
 CameraDetect.py >>> Looks for colors and if its too dark it prints out "camera blocked"
 CameraStatus.py >>> Is an example on how to detect if the camera is in use
-MotionDetector1.py >>> Looks for motion by comparing 2 grey masks
+MotionDetector1.py >>> Looks fqor motion by comparing 2 grey masks

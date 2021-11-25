@@ -126,12 +126,13 @@ def DetectMotion():
         df = df.append({"Start": time[i], "End": time[i + 1]}, ignore_index=True)
 
     # Creating a CSV file in which time of movements will be saved
-    df.to_csv("/home/j/PycharmProjects/Opencv_masking/data/Time_of_movements.csv")
+    df.to_csv("data/Time_of_movements.csv")
 
     video.release()
 
     # Destroying all the windows
     cv2.destroyAllWindows()
+    return print("Finished detecting motion")
 
 if __name__ == "__main__":
     DetectMotion()

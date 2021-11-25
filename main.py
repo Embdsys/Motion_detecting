@@ -5,7 +5,7 @@ import ColorDetect
 # Still shows windows for demonstration
 
 # Press q to exit the windows, represents accelerometer
-#MotionDetector1.DetectMotion()
-
+MotionDetector1.DetectMotion()
+#print("Sanity check!")
 # Color detect for camera obstruction
 ColorDetect.DetectColors()
