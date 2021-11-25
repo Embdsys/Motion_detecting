@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 import time
 
-def DetectColors():
+def DetectColors(flag=0):
     # Capturing video through webcam
     webcam = cv2.VideoCapture(0)
 
@@ -134,18 +134,26 @@ def DetectColors():
         # Program Termination
         cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
 
-        # Save colors detected
+        # Save detected colors
         detected_colors = [red_area, green_area, blue_area]
         #print(detected_colors)
 
-        # Evaluate colors
+        # Logic?
         for i in detected_colors:
             if i < 100:
                 print("missing a color")
+                flag += 1
+            else:
+                flag = 0
 
-        if cv2.waitKey(10) & 0xFF == ord('q'):
+        if flag > 1000:
             webcam.release()
-            cv2.destroyAllWindows()
+            print("Camera must be blocked")
+            return False
+
+        if cv2.waitKey(10) & 0xFF == ord('q'): #Will be replaced for accelerometer triggering
+            webcam.release()
+            #cv2.destroyAllWindows()
             break
     return True
 if __name__ == "__main__":
