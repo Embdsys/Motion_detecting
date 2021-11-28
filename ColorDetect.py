@@ -7,6 +7,9 @@ def DetectColors(flag=0):
     # Capturing video through webcam
     webcam = cv2.VideoCapture(0)
 
+    # Flag initialization
+    flag = 0
+
     # Initialize area counters
     red_area = 0
     green_area = 0
@@ -141,12 +144,13 @@ def DetectColors(flag=0):
         # Logic?
         for i in detected_colors:
             if i < 100:
-                print("missing a color")
+                print (i)
                 flag += 1
+                print(f"missing a color: {flag}")
             else:
                 flag = 0
 
-        if flag > 1000:
+        if flag > 100:
             webcam.release()
             print("Camera must be blocked")
             return False
@@ -154,7 +158,8 @@ def DetectColors(flag=0):
         if cv2.waitKey(10) & 0xFF == ord('q'): #Will be replaced for accelerometer triggering
             webcam.release()
             #cv2.destroyAllWindows()
-            break
-    return True
+            return True
+
+
 if __name__ == "__main__":
     DetectColors()

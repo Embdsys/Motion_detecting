@@ -6,6 +6,7 @@ import cv2, time, pandas
 # importing datetime class from datetime library
 from datetime import datetime
 import time as tempo
+import os
 # Assigning our static_back to None
 #import ComplementaryFunctions
 def DetectMotion():
@@ -77,7 +78,10 @@ def DetectMotion():
 
             #Take 100 snapshots
             i+=1
-            cv2.imwrite('/home/j/PycharmProjects/Opencv_masking/data/Frame' + str(i) + '.jpg', frame)
+            timestamp = datetime.now()
+            timestamp1 = timestamp.strftime("%H_%M_%d_%m")
+            os.system(f"mkdir data/{timestamp1}")
+            cv2.imwrite(f'data/{timestamp1}/Frame' + str(i) + '.jpg', frame)
             if i > 100:
                 i = 0
 
