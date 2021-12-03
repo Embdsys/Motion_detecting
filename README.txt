@@ -1,5 +1,5 @@
 The most painfull thing about this is to install opencv
-If you're using Pycharm just go to python packages and loo for opencv-python... that's it
+If you're using Pycharm just go to python packages and look for opencv-python... that's it
 
 Use main to run the other 2 functions:
 
